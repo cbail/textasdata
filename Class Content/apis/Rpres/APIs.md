@@ -81,6 +81,17 @@ Output of API call:
 <img src="duke_google.png" height="500" />
 
 
+Designing your Own API Calls
+========================================================
+
+Designing your Own API Calls
+========================================================
+&nbsp;
+
+<img src="Anatomy of an API Call.png" height="400" />
+
+
+
 
 API Credentials
 ========================================================
@@ -93,7 +104,7 @@ Example: Facebook API
 
 Navigate to:
 
-https://developers.facebook.com/tools/explorer
+https://developers.facebook.com/tools/explorer?classic=0
 
 
 
@@ -114,6 +125,24 @@ An Example with Twitter's API
 
 ![](twitter_dialogue.png)
 
+Select Account Type and Describe Use
+========================================================
+
+![](organization.png)
+
+The Waiting is the Hardest Part...
+========================================================
+
+![](waiting.png)
+
+Your Developer Console
+========================================================
+
+![](apppage.png)
+
+
+
+
 Callback URL
 ========================================================
 &nbsp;
@@ -127,7 +156,8 @@ Uncheck 'Enable Callback Locking'
 Keys and Access Tokens
 ========================================================
 
-<img src="credentials_blurred.png" height="400" />
+![](credentials_blurred.png)
+
 
 The rtweet Package
 ========================================================
@@ -147,6 +177,8 @@ Define your Credentials
 app_name<-"YOURAPPNAMEHERE"
 consumer_key<-"YOURKEYHERE"
 consumer_secret<-"YOURSECRETHERE"
+access_token<-"YOURACCESSTOKENHERE"
+access_token_secret<-"YOURACCESSTOKENSECRETHERE"
 ```
 
 
@@ -156,7 +188,8 @@ Authenticate Yourself with Twitter API
 
 ```r
 library(rtweet)
-create_token(app=app_name, consumer_key=consumer_key, consumer_secret=consumer_secret,
+create_token(app=app_name, consumer_key=consumer_key, consumer_secret=consumer_secret, access_token=access_token,
+access_token_secret=access_token_secret,
 set_renv = TRUE)
 ```
 
@@ -396,13 +429,6 @@ elected_official_tweets<-as.data.frame(NULL)
 
 for(i in 1:nrow(elected_officials)){
   
-  # #first, check rate limits
-  rate_limits<-rate_limit()
-  limit<-rate_limits[rate_limits$query=="statuses/user_timeline",]
-  if(limit$remaining==0){
-    Sys.sleep(15*60)
-  }
-
   #pull tweets
   tweets<-get_timeline(elected_officials$screen_name[i], n=100)
   
@@ -418,56 +444,6 @@ for(i in 1:nrow(elected_officials)){
 ```
 
 
-Go back to Graph API Explorer
-========================================================
-&nbsp;
-
-https://developers.facebook.com/tools/explorer/
-
-
-
-Create Access Token Object
-========================================================
-&nbsp;
-
-```r
-install.packages("Rfacebook")
-library(Rfacebook)
-token <- "INSERTYOURNUMBERHERE"
-```
-
-
-
-Your first Facebook API Call
-========================================================
-&nbsp;
-
-```r
-getUsers("me", token=token)
-```
-
-
-Retrieve your Likes
-========================================================
-&nbsp;
-
-```r
-my_likes <- getLikes(user="me", token=token)
-```
-
-Working with Public Pages
-========================================================
-&nbsp;
-
-https://www.facebook.com/DukeUniv/
-
-Working with Public Pages
-========================================================
-&nbsp;
-
-```r
-duke_fb<-getPage("DukeUniv", token=token)
-```
 
 
 There are R packages for other APIs
@@ -483,18 +459,6 @@ There are also APIs that do Analysis for You!
 &nbsp;
 
 **For example, visualization (`plotly`)**
-
-
-
-Designing your Own API Calls
-========================================================
-
-Designing your Own API Calls
-========================================================
-&nbsp;
-
-<img src="Anatomy of an API Call.png" height="400" />
-
 
 
 Challenges of Working with APIs

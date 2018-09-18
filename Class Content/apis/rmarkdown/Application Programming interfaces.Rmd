@@ -16,11 +16,11 @@ output:
 
 # Introduction
 
-Application Programming Interfaces, or APIs, have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well. Compared to screen-scraping data, which is often illegal, logistically difficult (or both), APIs are a useful tool to make custom requests for data in manner that is well structured and considerably easier to work with than the HTML or XML data described in my previous tutorials.
+Application Programming Interfaces, or APIs, have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well. Compared to screen-scraping data, which is often illegal, logistically difficult (or both), APIs are a useful tool to make custom requests for data in manner that is well structured and considerably easier to work with than the HTML or XML data described in my previous tutorials on screenscraping.
 
 # What is an Application Programming Interface?
 
-APIs are tools for building apps or other forms of software. Software developers can combine these tools in various ways---or combine them with tools from other APIs---in order to generate even more useful tools. Most of us use such apps each day. For example, if you install the Spotify app within your Facebook page to share music with your friends, this app is extracting data from Spotify's API and then posting it to your Facebook page by communicating with Facebook's API. There are countless examples of this on the internet at present--- thanks in large part to the advent of Web 2.0, or the historical moment where the internet websites became became much more intertwined and dependent.
+APIs are tools for building apps or other forms of software that help people access certain parts of large databases. Software developers can combine these tools in various ways---or combine them with tools from other APIs---in order to generate even more useful tools. Most of us use such apps each day. For example, if you install the Spotify app within your Facebook page to share music with your friends, this app is extracting data from Spotify's API and then posting it to your Facebook page by communicating with Facebook's API. There are countless examples of this on the internet at present--- thanks in large part to the advent of Web 2.0, or the historical moment where the internet websites became became much more intertwined and dependent.
 
 The number of APIs that are publicly available has expanded dramatically over the past decade, as the figure below shows. At the time of this writing, the website [Programmable Web](https://www.programmableweb.com/apis/directory) lists more than 19,638 APIs from sites as diverse as Google, Amazon, YouTube, the New York Times, del.icio.us, LinkedIn, and many others. Though the core function of most APIs is to provide software developers with access to data, many APIs now analyze data as well. This might include facial recognition APIs, voice to text APIs, APIs that produce data visualizations, and so on.
 
@@ -38,20 +38,22 @@ In order to illustrate how an API works, it will be useful to start with a very 
 
 What we are seeing is something called JSON data. Though it may look somewhat messy at first glance--- lots of brackets, colons, commas, and indendation patterns---it is in fact very highly structured, and capable of storing complex types of data. Here, we can see that our request to geocode "Duke" not only identified the city within which it is located (Durham), but also the County, Country, and---towards the end of the page---the latitude and longitude data we were looking for. We will learn how to extract that piece of information later. The goal of the current discussion is to give you an idea of what an API is and how they work. 
 
+If we wanted to search for another geographic location, we could take the link above and replace "Duke" with the name of another place-- try it out to give yourself a very rudimentary sense of how an API works.
+
 # API Credentials
 
-Though anyone can make a request to the Google Maps API, getting data from Facebook's API (which Facebook calls the "Graph" API) is considerably more difficult. This is because---with good reason---Facebook does not want a software developer to collect data about people whom they do not have a connection with on Facebook. In order to prevent this, Facebook's Graph API---and many other APIs---require you to obtain "credentials" or codes/passwords that identify you and determine which types of data you are allowed to access. To illustrate this further, let's take a look at a tool Facebook built to help people learn about APIs. It's called the [Graph API explorer](https://developers.facebook.com/tools/explorer).
+Though anyone can make a request to the Google Maps API, getting data from Facebook's API (which Facebook calls the "Graph" API) is considerably more difficult. This is because---with good reason---Facebook does not want a software developer to collect data about people whom they do not have a connection with on Facebook. In order to prevent this, Facebook's Graph API---and many other APIs---require you to obtain "credentials" or codes/passwords that identify you and determine which types of data you are allowed to access. To illustrate this further, let's take a look at a tool Facebook built to help people learn about APIs. It's called the [Graph API explorer](https://developers.facebook.com/tools/explorer?classic=0).
 
 <br>
-![](graph_api_explorer.png)
+![](apiexplorer.png)
 
-If you have a Facebook account--- and if you were logged in--- Facebook will generate credentials for you automatically in the form of something called an "Access Token." In the screenshot above, this appears in a bar towards the top of the screen. This code will give you temporary authorization to make requests from Facebook's Graph API---but ONLY for data that you are allowed to access. The bar that begins with "GET" allows us to make a request from the API. You may notice that there is some jargon---some of it describes the current version of Facebook's API (3.0), and another part of it describes my numeric Facebook ID. Finally, take note of the pane on the lower right side of the screenshot which describes the output of my API call that would appear in my web browser, had I constructed a URL as we did with the Google example above. If we wanted to do the same thing with the Facebook Graph API, we would have to identify the appropriate URL *and* include our access token at the end of the URL. If we did not do this, we would receive an error in our browser telling us we do not have permission to make the request.
+If you have a Facebook account--- and if you were logged in--- Facebook will generate credentials for you automatically in the form of something called an "Access Token." In the screenshot above, this appears in a bar towards the lower bottom part of the screen. This code will give you temporary authorization to make requests from Facebook's Graph API---but ONLY for data that you are allowed to access from your own Facebook page. If you click the blue "submit" button at the top right of the screen, you will see some output that contains your name and an ID that Facebook assigns to you. With some more effort, we could use this tool to make API calls to access our friend list, our likes, and so on, but for now, I'm simply trying to make the point that each person gets their own code that allows them to access some, but certainly not all, of the data on Facebook's API. If I were to write in "cocacola" instead of "me" to get access to data posted by this business, I would get an error message suggesting that my current credentials do not give me access to that data.
 
 Credentials may not only determine your access to people with whom you are connected on a social network, but also other privileges you may have vis-a-vis an API. For example, many APIs charge money for access to their data or services, and thus you will only receive your credentials after setting up an account. As we will see below, some sites also require you to have multiple types of credentials which can be described using a variety of verbiage such as "tokens","keys", or "secrets."
 
 **Now YOU try it!!!**
 
-The Graph API explorer allows you to search for different fields. Take a moment and try to see whether you can make a call for other types of information about yourself, or someone else. If you do not find the information you want, it may be that a) the data does not exist; b) the data exists but you do not have access to it; or c) you have used the wrong syntax to make your query. Don't worry if you can't get the query language right for now--- as you will soon see, there are a number of R packages that will save you the trouble for sites such as Facebook.
+The Graph API explorer allows you to search for different fields. Take a moment and try to see whether you can make a call for other types of information about yourself. To do this, you'll have to request different levels of "permission" using the dropdown menu on the right hand side of the explorer tool page. You can populate the syntax for different fields using the "search for a field" box on the upper right hand side of the page. Don't worry if you can't get the query language right for now---specifying the syntax of an API call requires mastering each API's documentation, which can take a very long time. This tool tries to help you, but it does not work perfectly and constructing the right call may require spending quite a bit of time reading through the API documentation. More importantly-- as you will soon see-- there are a number of R packages that contain functions that make API calls for you that will save you the time and energy necessary to learn the syntax specific to each API.
 
 
 # Rate Limiting
@@ -64,14 +66,29 @@ The exact timing of rate limiting is not always public, since knowing such time 
 
 # An Example with Twitter's API
 
-To illustrate the process of obtaining credentials and better understanding rate limiting, I will now present a worked example of how to obtain different types of data from the Twitter API. The first step in this process is to obtain credentials from Twitter that will allow you to make API calls. Twitter, like many other websites, requires you to create an account in order to receive credentials. To do this, we need to visit https://apps.twitter.com. There, you will have to create a developer account. You will be asked for your mobile phone number because two-factor authentication helps Twitter prevent people from obtaining a large number of different credentials using multiple accounts that could be use to collect large amounts of data without being rate limited---or, for other nefarious purposes such as creating armies of bots that produce spam or attempt to influence elections.
+To illustrate the process of obtaining credentials and better understanding rate limiting, I will now present a worked example of how to obtain different types of data from the Twitter API. The first step in this process is to obtain credentials from Twitter that will allow you to make API calls.
 
-Once you've logged in, click the "Create New App" button at the top right of the screen. Our goal is not to create a fully fledged app at this point, but simply to obtain the credentials necessary to begin making some simple calls to the Twitter API:
+Twitter, like many other websites, requires you to create an account in order to receive credentials. To do this, we need to visit https://apps.twitter.com. There, you will have to create a developer account by clicking "Apply for a developer account." You may be asked to confirm your email address or add a mobile phone number because two-factor authentication helps Twitter prevent people from obtaining a large number of different credentials using multiple accounts that could be use to collect large amounts of data without being rate limited---or, for other nefarious purposes such as creating armies of bots that produce spam or attempt to influence elections.
+
 
 <br>
 ![](twitter_dialogue.png)
 
-You can name your app whatever you want, describe it however you want, and put in the name of any website you like. The two important things you must do are 1) put the following text in the "Callback URL" text box: `http://127.0.0.1:1410` This number describes the location where the API will return your data-- in this case, it is your web browser (but it could be another site where you want to store the results of the data.); 2) You must uncheck the "Enable Callback Locking" button on the same page. Note: at the time of this writing, Twitter is discussing removing this check box, so you may need to search the documentation of the `rtweet` package for more information if the authentication functions below do not work.
+Next, you will be asked whether you want to request a developer account for an organization or for personal use. You will most likely want to choose personal use (the organizational account can allow one person to request credentials that can be shared across a large group of people which could be useful if you work within a lab or other business). 
+
+<br>
+![](organization.png)
+
+
+Next, you will be asked a series of questions about how you want to use Twitter's API. Unfortunately Twitter does not publish exact guidelines about who is allowed to use the API and why-- as far as I know. That said, you can learn a lot by reading Twitter's terms of service. Obvious red flags would include people who are hoping to build tools that somehow harasses Twitter users, hoards Twitter's data (particularly for business purposes), ot other negative purposes. You will see these terms after you describe why you want to apply for credentials. 
+
+Once you accept the terms, your app developer request will go under review by Twitter. At the time of this writing, this process is rather time intensive-- and with good reason, since Twitter is most likely employing large numbers of people to vet everyone who is applying for credentials right now. At the time of this writing, I've seen people get credentials within a day or two, and others who have waited more than a week. I even unfortunately know of several cases where people made multiple applications without any of the red flags above (and using different wording) that were ultimately rejected. Hopefully, yours will be approved (and if not, you might try mentioning your problem in a tweet to the @TwitterAPI on Twitter-- this seems to have worked for several people that I know)
+
+<br>
+![](waiting.png)
+
+Once your developer account is approved, you can log in once again and click the "Create New App" button at the top right of the screen. Our goal is not to create a fully fledged app at this point, but simply to obtain the credentials necessary to begin making some simple calls to the Twitter API.
+You can name your app whatever you want, describe it however you want, and put in the name of any website you like. The two important things you must do are 1) put the following text in the "Callback URL" text box: `http://127.0.0.1:1410` This number describes the location where the API will return your data-- in this case, it is your web browser (but it could be another site where you want to store the results of the data.); 2) You must uncheck the "Enable Callback Locking" button on the same page. Note: at the time of this writing, Twitter is discussing removing this check box, so you may need to search the documentation of the `rtweet` package on Github or elsewhere for more information if the authentication functions below do not work.
 
 If you followed the steps above, the name of your application should now appear. Click on it, and then click on the "Keys and Access Tokens" tab in order to get your credentials. Unfortunately, Twitter makes developers get two different types of credentials which are listed on that page. These are blurred out in the screenshot below because I do not want people who read this web page to have access to my credneitals, which they could then abuse in various ways: 
 
@@ -85,6 +102,8 @@ The next step is to define your credentials as string variables in R, which we w
 app_name<-"YOURAPPNAMEHERE"
 consumer_key<-"YOURKEYHERE"
 consumer_secret<-"YOURSECRETHERE"
+access_token<-"YOURACCESSTOKENHERE"
+access_token_secret<-"YOURACCESSTOKENSECRETHERE"
 ```
 
 
