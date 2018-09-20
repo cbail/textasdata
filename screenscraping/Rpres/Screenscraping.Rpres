@@ -36,31 +36,6 @@ transition: fade
   Twitter: https://www.twitter.com/chris_bail
 
 
-How to Follow along with Me
-========================================================
-
-https://compsocialscience.github.io/summer-institute/2018/#schedule
-
-<embed width="800" height="600" src="https://compsocialscience.github.io/summer-institute/2018/#schedule">
-
-
-RPres (HTML) Files (slides)
-========================================================
-&nbsp; 
-
-<img src="Anatomy of .Rpres.png" height="400" />
-
-
-Markdown Files (annotated code)
-========================================================
-&nbsp;
-
-<img src="R Markdown Anatomy.png" height="600" />
-
-
-
-
-
 What is Screen-Scraping?
 ========================================================
 
@@ -243,19 +218,26 @@ RSelenium
 &nbsp; 
 
 ```{r, eval=FALSE}
-devtools::install_github("ropensci/RSelenium")
+install.packages("ropensci/RSelenium")
 library(Rselenium)
 ```
 &nbsp; 
 
-Note: you may need to install Java to get up and running see [this](http://rpubs.com/johndharrison/RSelenium-Basics) tutorial
+Note: you may need to install Java to get up and running see [this](http://rpubs.com/johndharrison/RSelenium-Basics) tutorial. Also, you will need to install [Docker](http://www.docker.com).
+
+Installing RSelenium from Docker
+========================================================
+&nbsp;
+```{r, eval=FALSE}
+system('docker run -d -p 4445:4444 selenium/standalone-chrome')
+```
 
 RSelenium
 ========================================================
 &nbsp;
 
 ```{r, eval=FALSE}
-
+library(RSelenium)
 rD <- rsDriver()
 remDr <- rD$client
 ```
@@ -326,12 +308,7 @@ When Should I Use Screen-scraping?
 
 
 
-Remember Annotated Code Here:
-========================================================
 
-https://compsocialscience.github.io/summer-institute/2018/#schedule
-
-<embed width="1000" height="400" src="https://cbail.github.io/SICSS_Screenscraping_in_R.html">
 
 
 
