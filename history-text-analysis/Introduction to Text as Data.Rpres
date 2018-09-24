@@ -29,24 +29,6 @@ transition: fade
   Twitter: https://www.twitter.com/chris_bail
 
 
-Our Schedule for Today
-========================================================
-&nbsp;
-
-Time | Activity
-------------- | -------------
-9:15-9:30AM | History of Quantitative Text Analysis
-9:30-9:45AM | Basic Text Analysis/GREP  
-9:45-10:00AM | Dictionary-Based Text Analysis
-10:00-10:15AM | Coffee Break  
-10:15-11:15PM | Topic Models/Structural Topic Models
-11:15-11:20 | Break
-11:20-12:30PM | Text Networks 
-12:30-1:30PM | Lunch  
-1:30-4:00PM | Group Exercise  
-4:00-5:30PM | Ned Smith (Kellog) on Livestream
-
-
 Harold Laswell
 ========================================================
 
