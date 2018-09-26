@@ -51,7 +51,7 @@ GREP
 &nbsp;
 
 ```r
-wikipedia_scrape<- "Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t" 
+duke_web_scrape<- "Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t" 
 ```
 
 grepl
