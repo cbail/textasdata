@@ -840,7 +840,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>&nbsp;</p>
 
-<pre><code class="r">wikipedia_scrape&lt;- &quot;Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t&quot; 
+<pre><code class="r">duke_web_scrape&lt;- &quot;Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t&quot; 
 </code></pre>
 
 </div>
@@ -851,7 +851,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>&nbsp;</p>
 
-<pre><code class="r">grepl(&quot;Class&quot;, wikipedia_scrape)
+<pre><code class="r">grepl(&quot;Class&quot;, duke_web_scrape)
 </code></pre>
 
 <pre><code>[1] TRUE
@@ -865,7 +865,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>&nbsp;</p>
 
-<pre><code class="r">gsub(&quot;\t&quot;, &quot;&quot;, wikipedia_scrape)
+<pre><code class="r">gsub(&quot;\t&quot;, &quot;&quot;, duke_web_scrape)
 </code></pre>
 
 <pre><code>[1] &quot;Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n&quot;
@@ -879,7 +879,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <p>&nbsp;</p>
 
-<pre><code class="r">gsub(&quot;\t|\n&quot;, &quot;&quot;, wikipedia_scrape)
+<pre><code class="r">gsub(&quot;\t|\n&quot;, &quot;&quot;, duke_web_scrape)
 </code></pre>
 
 <pre><code>[1] &quot;Class of 2018: Senior Stories of Discovery, Learning and Serving&quot;
