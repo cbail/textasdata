@@ -474,11 +474,14 @@ tidy_trump_DTM<-
 
 ========================================================
 
-# **Now YOU try it!!!**
+# **Class Exercise**
 
-1) Take the corpus or tidytext dataset you created in the previous exercise;  
+1) Pick one of the Amazon review datasets from this link: http://jmcauley.ucsd.edu/data/amazon/
 
-2) Count the top five words in the dataset after removing stop words;
+2) Create a tidytext dataset of these reviews
 
-3) Create a Document-Term Matrix
+3) Count the top five words in the dataset after removing stop words;
+
+4) Create a Document-Term Matrix
+
 
