@@ -59,7 +59,7 @@ grepl
 &nbsp;
 
 ```r
-grepl("Class", wikipedia_scrape)
+grepl("Class", duke_web_scrape)
 ```
 
 ```
@@ -72,7 +72,7 @@ gsub
 &nbsp;
 
 ```r
-gsub("\t", "", wikipedia_scrape)
+gsub("\t", "", duke_web_scrape)
 ```
 
 ```
@@ -84,7 +84,7 @@ gsub (2 patterns)
 &nbsp;
 
 ```r
-gsub("\t|\n", "", wikipedia_scrape)
+gsub("\t|\n", "", duke_web_scrape)
 ```
 
 ```
