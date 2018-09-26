@@ -37,13 +37,13 @@ To demonstrate why you need to learn some GREP, let's return to an issue we enco
 Let's create a character string that includes such characters as follows (the meaning of the text isn't important- this was scraped from the Duke University web page "Events" section):
 
 ```{r}
-wikipedia_scrape<- "Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t" 
+duke_web_scrape<- "Class of 2018: Senior Stories of Discovery, Learning and Serving\n\n\t\t\t\t\t\t\t" 
 ```
 
 Once again, GREP-style commands search for a certain pattern. For example, let's write some code that determines whether the word "Class" is part of our string using the `grepl` function in base R:
 
 ```{r}
-grepl("Class", wikipedia_scrape)
+grepl("Class", duke_web_scrape)
 ```
 
 The text within quotes is the pattern we are trying to find, and the second argument is the string we want to search within. The output tells us that there was one occurrence of "Class."
@@ -51,7 +51,7 @@ The text within quotes is the pattern we are trying to find, and the second argu
 Now let's use the `gsub` command to remove all `\t`s from the string
 
 ```{r}
-gsub("\t", "", wikipedia_scrape)
+gsub("\t", "", duke_web_scrape)
 ```
 
 The first argument in the `gsub` function names the pattern we are looking for, the second (blank) argument tells us what we want to replace that pattern with, and the third argument is the strong we want to transform.
@@ -59,7 +59,7 @@ The first argument in the `gsub` function names the pattern we are looking for, 
 We can also pass two arguments at once using the `|` separator as follows:
 
 ```{r}
-gsub("\t|\n", "", wikipedia_scrape)
+gsub("\t|\n", "", duke_web_scrape)
 ```
 
 GREP-style commands also include a wildcard which can be used to, for example, find all words in a string that start with a certain letter, such as "P":
