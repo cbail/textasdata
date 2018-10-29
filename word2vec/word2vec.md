@@ -82,6 +82,22 @@ sudo /usr/bin/easy_install pip
 sudo /usr/local/bin/pip install --upgrade virtualenv
 ```
 
+Other packages we need for this example
+========================================================
+
+ (You may need to use `install.packages("package")` on some of these first)
+
+```r
+library(reticulate)
+library(purrr)
+library(text2vec) # note that this is a beta version of the package. code/names offuntions that comes from this package may change in future versions
+library(dplyr)
+library(Rtsne)
+library(ggplot2)
+library(plotly)
+```
+
+
 Preprocessing
 ========================================================
 
@@ -92,6 +108,9 @@ load(url("https://cbail.github.io/Elected_Official_Tweets.Rdata"))
 elected_no_retweets <- elected_official_tweets %>%
   filter(is_retweet == F) %>%
   select(c("screen_name", "text"))
+
+tokenizer <- text_tokenizer(num_words = 20000)
+tokenizer %>% fit_text_tokenizer(elected_no_retweets$text)
 ```
 
 

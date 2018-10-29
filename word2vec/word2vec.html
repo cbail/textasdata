@@ -862,6 +862,23 @@ sudo /usr/local/bin/pip install --upgrade virtualenv
 
 </section>
 <section data-transition="fade" data-transition-speed="default">
+<h3>Other packages we need for this example</h3>
+<div class="slideContent" >
+<p>(You may need to use <code>install.packages(&quot;package&quot;)</code> on some of these first)</p>
+
+<pre><code class="r">library(reticulate)
+library(purrr)
+library(text2vec) # note that this is a beta version of the package. code/names offuntions that comes from this package may change in future versions
+library(dplyr)
+library(Rtsne)
+library(ggplot2)
+library(plotly)
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="fade" data-transition-speed="default">
 <h3>Preprocessing</h3>
 <div class="slideContent" >
 <pre><code class="r">load(url(&quot;https://cbail.github.io/Elected_Official_Tweets.Rdata&quot;))
@@ -869,6 +886,9 @@ sudo /usr/local/bin/pip install --upgrade virtualenv
 elected_no_retweets &lt;- elected_official_tweets %&gt;%
   filter(is_retweet == F) %&gt;%
   select(c(&quot;screen_name&quot;, &quot;text&quot;))
+
+tokenizer &lt;- text_tokenizer(num_words = 20000)
+tokenizer %&gt;% fit_text_tokenizer(elected_no_retweets$text)
 </code></pre>
 
 </div>
