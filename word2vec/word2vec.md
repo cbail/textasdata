@@ -96,7 +96,7 @@ Other packages we need for this example
 ```r
 library(reticulate)
 library(purrr)
-library(text2vec) # note that this is a beta version of the package. code/names offuntions that comes from this package may change in future versions
+library(text2vec) # note that this is a beta version of the package. code/names of funtions that come from this package may change in future versions
 library(dplyr)
 library(Rtsne)
 library(ggplot2)
