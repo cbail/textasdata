@@ -45,6 +45,12 @@ What is word2vec?
 
 <img src="skip_gram_mikolov.png" height="400" />
 
+What is word2vec?
+========================================================
+Interactive example:
+
+https://anvaka.github.io/pm/#/galaxy/word2vec-wiki?cx=-17&cy=-237&cz=-613&lx=-0.0575&ly=-0.9661&lz=-0.2401&lw=-0.0756&ml=300&s=1.75&l=1&v=d50_clean_small
+
 ========================================================
 
 # **Using the Skip-Gram Model**
