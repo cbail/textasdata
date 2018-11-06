@@ -878,11 +878,13 @@ sudo /usr/local/bin/pip install --upgrade virtualenv
 
 <pre><code class="r">library(reticulate)
 library(purrr)
-library(text2vec) # note that this is a beta version of the package. code/names offuntions that comes from this package may change in future versions
+library(text2vec) # note that this is a beta version of the package. code/names of funtions that come from this package may change in future versions
 library(dplyr)
 library(Rtsne)
 library(ggplot2)
 library(plotly)
+library(stringr)
+library(keras)
 </code></pre>
 
 </div>
@@ -893,11 +895,24 @@ library(plotly)
 <div class="slideContent" >
 <pre><code class="r">load(url(&quot;https://cbail.github.io/Elected_Official_Tweets.Rdata&quot;))
 
+# We want to use original tweets, not retweets:
 elected_no_retweets &lt;- elected_official_tweets %&gt;%
   filter(is_retweet == F) %&gt;%
   select(c(&quot;screen_name&quot;, &quot;text&quot;))
 
-tokenizer &lt;- text_tokenizer(num_words = 20000)
+# Many tweets contain URLs, which we don&#39;t want considered in the model:
+elected_no_retweets$text &lt;- str_replace_all(string = elected_no_retweets$text,
+           pattern = &quot;https.+&quot;,
+           replacement = &quot;&quot;)
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="fade" data-transition-speed="default">
+<h3>Preprocessing</h3>
+<div class="slideContent" >
+<pre><code class="r">tokenizer &lt;- text_tokenizer(num_words = 20000)
 tokenizer %&gt;% fit_text_tokenizer(elected_no_retweets$text)
 </code></pre>
 
@@ -986,7 +1001,7 @@ summary(model)
 <pre><code class="r">model %&gt;%
   fit_generator(
     skipgrams_generator(elected_no_retweets$text, tokenizer, skip_window, negative_samples), 
-    steps_per_epoch = 1000, epochs = 2
+    steps_per_epoch = 100, epochs = 2
   )
 </code></pre>
 
@@ -1027,8 +1042,6 @@ find_similar_words(&quot;republican&quot;, embedding_matrix)
 find_similar_words(&quot;democrat&quot;, embedding_matrix)
 find_similar_words(&quot;partisan&quot;, embedding_matrix)
 </code></pre>
-
-<p>As you can see, we might need to go back and clean up the text a bit more before tokenizing (getting rid of URLs and pictures)</p>
 
 </div>
 

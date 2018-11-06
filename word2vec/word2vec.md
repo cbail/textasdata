@@ -252,7 +252,7 @@ find_similar_words("republican", embedding_matrix)
 find_similar_words("democrat", embedding_matrix)
 find_similar_words("partisan", embedding_matrix)
 ```
-As you can see, we might need to go back and clean up the text a bit more before tokenizing (getting rid of URLs and pictures)
+
 
 Visualize Embeddings
 ========================================================
