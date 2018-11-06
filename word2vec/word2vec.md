@@ -101,6 +101,8 @@ library(dplyr)
 library(Rtsne)
 library(ggplot2)
 library(plotly)
+library(stringr)
+library(keras)
 ```
 
 
@@ -110,14 +112,27 @@ Preprocessing
 
 ```r
 load(url("https://cbail.github.io/Elected_Official_Tweets.Rdata"))
-     
+ 
+# We want to use original tweets, not retweets:
 elected_no_retweets <- elected_official_tweets %>%
   filter(is_retweet == F) %>%
   select(c("screen_name", "text"))
 
+# Many tweets contain URLs, which we don't want considered in the model:
+elected_no_retweets$text <- str_replace_all(string = elected_no_retweets$text,
+           pattern = "https.+",
+           replacement = "")
+```
+
+Preprocessing
+========================================================
+
+
+```r
 tokenizer <- text_tokenizer(num_words = 20000)
 tokenizer %>% fit_text_tokenizer(elected_no_retweets$text)
 ```
+
 
 The Skip-Gram Model
 ========================================================
@@ -198,7 +213,7 @@ You may have to play around with the number of steps and epochs you want to use
 model %>%
   fit_generator(
     skipgrams_generator(elected_no_retweets$text, tokenizer, skip_window, negative_samples), 
-    steps_per_epoch = 1000, epochs = 2
+    steps_per_epoch = 100, epochs = 2
   )
 ```
 
