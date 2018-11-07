@@ -78,7 +78,8 @@ class: wrap-url
 &nbsp;
 Let's load our tweets from elected officials and follow along with some code from Julia Silge:
 
-```{r}
+
+```r
 library(tidytext)
 library(dplyr)
 load(url("https://cbail.github.io/Elected_Official_Tweets.Rdata"))
@@ -94,7 +95,8 @@ Calculate Unigram Probabilities
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 unigram_probs <- elected_no_retweets %>%
     unnest_tokens(word, text) %>%
     count(word, sort = TRUE) %>%
@@ -105,15 +107,34 @@ word2vec in Tidytext
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 unigram_probs
+```
+
+```
+# A tibble: 23,761 x 3
+   word      n       p
+   <chr> <int>   <dbl>
+ 1 the   11864 0.0434 
+ 2 to    10546 0.0386 
+ 3 t.co   6498 0.0238 
+ 4 https  6422 0.0235 
+ 5 and    5968 0.0218 
+ 6 of     5315 0.0194 
+ 7 in     4443 0.0163 
+ 8 a      4242 0.0155 
+ 9 for    3580 0.0131 
+10 on     2466 0.00902
+# ... with 23,751 more rows
 ```
 
 
 Skipgram probabilities
 ========================================================
 
-```{r, warnings=FALSE}
+
+```r
 library(tidyverse)
 library(widyr)
 tidy_skipgrams <- elected_no_retweets %>%
@@ -126,25 +147,44 @@ tidy_skipgrams <- elected_no_retweets %>%
 Skipgram probabilities
 ========================================================
 
-```{r}
+
+```r
 tidy_skipgrams
+```
+
+```
+# A tibble: 1,728,723 x 2
+   skipgramID word       
+   <chr>      <chr>      
+ 1 1_1        mortally   
+ 2 1_1        wounded    
+ 3 1_1        ari        
+ 4 1_1        fuld       
+ 5 1_1        heroically 
+ 6 1_1        pursued    
+ 7 1_1        the        
+ 8 1_1        palestinian
+ 9 1_2        wounded    
+10 1_2        ari        
+# ... with 1,728,713 more rows
 ```
 
 Skipgram probabilities
 ========================================================
 
-```{r}
+
+```r
 skipgram_probs <- tidy_skipgrams %>%
     pairwise_count(word, skipgramID, diag = TRUE, sort = TRUE) %>%
     mutate(p = n / sum(n))
-
 ```
 
 
 Normalized probabilities
 ========================================================
 
-```{r}
+
+```r
 normalized_prob <- skipgram_probs %>%
     filter(n > 20) %>%
     rename(word1 = item1, word2 = item2) %>%
@@ -161,10 +201,28 @@ What words are most closely associated with "Trump"?
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 normalized_prob %>% 
     filter(word1 == "trump") %>%
     arrange(-p_together)
+```
+
+```
+# A tibble: 118 x 7
+   word1 word2                n          p      p1        p2 p_together
+   <chr> <chr>            <dbl>      <dbl>   <dbl>     <dbl>      <dbl>
+ 1 trump trump             2350 0.000176   0.00149 0.00149         79.8
+ 2 trump donald              58 0.00000434 0.00149 0.0000476       61.5
+ 3 trump admin’s             55 0.00000412 0.00149 0.0000549       50.5
+ 4 trump admin              169 0.0000127  0.00149 0.000198        43.1
+ 5 trump administration's    64 0.00000479 0.00149 0.0000768       42.0
+ 6 trump pres                65 0.00000487 0.00149 0.0000914       35.8
+ 7 trump administration     537 0.0000402  0.00149 0.000775        34.9
+ 8 trump administration’s   170 0.0000127  0.00149 0.000285        30.0
+ 9 trump promised            25 0.00000187 0.00149 0.0000512       24.6
+10 trump sabotage            30 0.00000225 0.00149 0.0000622       24.3
+# ... with 108 more rows
 ```
 
 
@@ -172,7 +230,8 @@ Matrix Factorization
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 pmi_matrix <- normalized_prob %>%
     mutate(pmi = log10(p_together)) %>%
     cast_sparse(word1, word2, pmi)
@@ -182,7 +241,8 @@ Reduce Dimensionality
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 library(irlba)
 #remove missing data
 pmi_matrix@x[is.na(pmi_matrix@x)] <- 0
@@ -197,7 +257,8 @@ Silge's Function to find Synonyms
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 library(broom)
 
 search_synonyms <- function(word_vectors, selected_vector) {
@@ -211,16 +272,33 @@ search_synonyms <- function(word_vectors, selected_vector) {
     similarities %>%
         arrange(-similarity)    
 }
-
 ```
 
 Top words associated with "GOP"
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 gop <- search_synonyms(word_vectors,word_vectors["gop",])
 gop
+```
+
+```
+# A tibble: 6,019 x 2
+   token      similarity
+   <chr>           <dbl>
+ 1 tax            0.0830
+ 2 trump          0.0333
+ 3 code           0.0331
+ 4 regulatory     0.0330
+ 5 dollars        0.0299
+ 6 corporate      0.0273
+ 7 cuts           0.0270
+ 8 gop            0.0257
+ 9 sales          0.0249
+10 relief         0.0236
+# ... with 6,009 more rows
 ```
 
 
@@ -228,7 +306,8 @@ Now plot in 2D (SVD) space
 ========================================================
 &nbsp;
 
-```{r}
+
+```r
 library(irlba)
 #remove missing data
 pmi_matrix@x[is.na(pmi_matrix@x)] <- 0
@@ -237,23 +316,13 @@ pmi_svd <- irlba(pmi_matrix, 2, maxit = 500)
 #next we output the word vectors:
 word_vectors <- pmi_svd$u
 rownames(word_vectors) <- rownames(pmi_matrix)
-
 ```
 
 
 Plot
 ========================================================
 &nbsp;
-```{r, echo=FALSE}
-#grab first 200 words
-forplot<-as.data.frame(word_vectors[1:200,])
-forplot$word<-rownames(forplot)
-#now plot
-library(ggplot2)
-ggplot(forplot, aes(x=V1, y=V2, label=word))+
-  geom_text(aes(label=word),hjust=0, vjust=0)+
-  theme_minimal()
-```
+![plot of chunk unnamed-chunk-14](word2vec-figure/unnamed-chunk-14-1.png)
 
 
 ========================================================
@@ -305,7 +374,8 @@ We will be using the library `keras`
 
 The following code installs the `keras` package, which comes with a function that will install the TensorFlow dependencies
 
-```{r, eval = F}
+
+```r
 install.packages("keras")
 library(keras)
 ```
@@ -315,7 +385,8 @@ Installation
 &nbsp;
 To finish the installation process, we need to run:
 
-```{r, eval = F}
+
+```r
 install_keras()
 ```
 
@@ -332,7 +403,8 @@ Other packages we need for this example
 ========================================================
 &nbsp;
  (You may need to use `install.packages("package")` on some of these first)
-```{r, eval = F}
+
+```r
 library(reticulate)
 library(purrr)
 library(text2vec) # note that this is a beta version of the package. code/names of funtions that come from this package may change in future versions
@@ -348,8 +420,8 @@ library(keras)
 Preprocessing
 ========================================================
 &nbsp;
-```{r, eval = F}
 
+```r
 load(url("https://cbail.github.io/Elected_Official_Tweets.Rdata"))
  
 # We want to use original tweets, not retweets:
@@ -366,7 +438,8 @@ elected_no_retweets$text <- str_replace_all(string = elected_no_retweets$text,
 Preprocessing
 ========================================================
 &nbsp;
-```{r, eval = F}
+
+```r
 tokenizer <- text_tokenizer(num_words = 20000)
 tokenizer %>% fit_text_tokenizer(elected_no_retweets$text)
 ```
@@ -376,7 +449,8 @@ The Skip-Gram Model
 ========================================================
 &nbsp;
 We need to define a function to yield batches of a certain size for model training:
-```{r, eval=F}
+
+```r
 skipgrams_generator <- function(text, tokenizer, window_size, negative_samples) {
   gen <- texts_to_sequences_generator(tokenizer, sample(text))
   function() {
@@ -395,7 +469,8 @@ skipgrams_generator <- function(text, tokenizer, window_size, negative_samples) 
 
 Defining the Keras Model
 ========================================================
-```{r, eval = F}
+
+```r
 embedding_size <- 128  # Dimension of the embedding vector.
 skip_window <- 5       # How many words to consider left and right.
 num_sampled <- 1       # Number of negative examples to sample for each word.
@@ -407,7 +482,8 @@ input_context <- layer_input(shape = 1)
 Defining the Embedding Matrix
 ========================================================
 &nbsp;
-```{r, eval = F}
+
+```r
 embedding <- layer_embedding(
   input_dim = tokenizer$num_words + 1, 
   output_dim = embedding_size, 
@@ -427,7 +503,8 @@ context_vector <- input_context %>%
 Keras Model Cont.
 ========================================================
 
-```{r, eval = F}
+
+```r
 dot_product <- layer_dot(list(target_vector, context_vector), axes = 1)
 output <- layer_dense(dot_product, units = 1, activation = "sigmoid")
 
@@ -441,7 +518,8 @@ Model Training
 
 You may have to play around with the number of steps and epochs you want to use
 
-```{r, eval = F}
+
+```r
 model %>%
   fit_generator(
     skipgrams_generator(elected_no_retweets$text, tokenizer, skip_window, negative_samples), 
@@ -452,8 +530,8 @@ model %>%
 Extract the Embeddings
 ========================================================
 
-```{r, eval = F}
 
+```r
 embedding_matrix <- get_weights(model)[[1]]
 
 words <- data_frame(
@@ -471,7 +549,8 @@ row.names(embedding_matrix) <- c("UNK", words$word)
 Explore Embeddings
 ========================================================
 
-```{r, eval = F}
+
+```r
 find_similar_words <- function(word, embedding_matrix, n = 5) {
   similarities <- embedding_matrix[word, , drop = FALSE] %>%
     sim2(embedding_matrix, y = ., method = "cosine")
@@ -482,14 +561,14 @@ find_similar_words <- function(word, embedding_matrix, n = 5) {
 find_similar_words("republican", embedding_matrix)
 find_similar_words("democrat", embedding_matrix)
 find_similar_words("partisan", embedding_matrix)
-
 ```
 As you can see, we might need to go back and clean up the text a bit more before tokenizing (getting rid of URLs and pictures)
 
 Visualize Embeddings
 ========================================================
 
-```{r, eval = F}
+
+```r
 tsne <- Rtsne(embedding_matrix[2:500,], perplexity = 50, pca = FALSE)
 
 tsne_plot <- tsne$Y %>%
