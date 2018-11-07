@@ -113,7 +113,7 @@ unigram_probs
 Skipgram probabilities
 ========================================================
 
-```{r}
+```{r, warnings=FALSE}
 library(tidyverse)
 library(widyr)
 tidy_skipgrams <- elected_no_retweets %>%
