@@ -15,7 +15,9 @@
     position: relative;
     top: 4%;}
 
-
+.wrap-url pre code {
+  word-wrap:break-word;
+}
 
 </style>
 
@@ -42,14 +44,222 @@ What is word2vec?
 
 What is word2vec?
 ========================================================
+class: wrap-url
+
+Interactive example linked [here](https://anvaka.github.io/pm/#/galaxy/word2vec-wiki?cx=-17&cy=-237&cz=-613&lx=-0.0575&ly=-0.9661&lz=-0.2401&lw=-0.0756&ml=300&s=1.75&l=1&v=d50_clean_small)
+
+
+
+The Context Window
+========================================================
+class: wrap-url
+
+
+<img src="context_window.png" height="400" />
+
+The Context Window
+========================================================
+
+<img src="matrix_context.png" height="400" />
+
+
+Two tools with word2vec
+========================================================
+&nbsp;
+ 
+Continuous Bag of words predicts focus word based on context words. Skip-gram model predicts context words based on focus word
 
 <img src="skip_gram_mikolov.png" height="400" />
 
-What is word2vec?
-========================================================
-Interactive example:
 
-https://anvaka.github.io/pm/#/galaxy/word2vec-wiki?cx=-17&cy=-237&cz=-613&lx=-0.0575&ly=-0.9661&lz=-0.2401&lw=-0.0756&ml=300&s=1.75&l=1&v=d50_clean_small
+word2vec in Tidytext
+========================================================
+class: wrap-url
+&nbsp;
+Let's load our tweets from elected officials and follow along with some code from Julia Silge:
+
+```{r}
+library(tidytext)
+library(dplyr)
+load(url("https://cbail.github.io/Elected_Official_Tweets.Rdata"))
+# We want to use original tweets, not retweets:
+elected_no_retweets <- elected_official_tweets %>%
+  filter(is_retweet == F) %>%
+  select(c("text"))
+#create tweet id
+elected_no_retweets$postID<-row.names(elected_no_retweets)
+```
+
+Calculate Unigram Probabilities
+========================================================
+&nbsp;
+
+```{r}
+unigram_probs <- elected_no_retweets %>%
+    unnest_tokens(word, text) %>%
+    count(word, sort = TRUE) %>%
+    mutate(p = n / sum(n))
+```
+
+word2vec in Tidytext
+========================================================
+&nbsp;
+
+```{r}
+unigram_probs
+```
+
+
+Skipgram probabilities
+========================================================
+
+```{r}
+library(tidyverse)
+library(widyr)
+tidy_skipgrams <- elected_no_retweets %>%
+    unnest_tokens(ngram, text, token = "ngrams", n = 8) %>%
+    mutate(ngramID = row_number()) %>% 
+    unite(skipgramID, postID, ngramID) %>%
+    unnest_tokens(word, ngram)
+```
+
+Skipgram probabilities
+========================================================
+
+```{r}
+tidy_skipgrams
+```
+
+Skipgram probabilities
+========================================================
+
+```{r}
+skipgram_probs <- tidy_skipgrams %>%
+    pairwise_count(word, skipgramID, diag = TRUE, sort = TRUE) %>%
+    mutate(p = n / sum(n))
+
+```
+
+
+Normalized probabilities
+========================================================
+
+```{r}
+normalized_prob <- skipgram_probs %>%
+    filter(n > 20) %>%
+    rename(word1 = item1, word2 = item2) %>%
+    left_join(unigram_probs %>%
+                  select(word1 = word, p1 = p),
+              by = "word1") %>%
+    left_join(unigram_probs %>%
+                  select(word2 = word, p2 = p),
+              by = "word2") %>%
+    mutate(p_together = p / p1 / p2)
+```
+
+What words are most closely associated with "Trump"?
+========================================================
+&nbsp;
+
+```{r}
+normalized_prob %>% 
+    filter(word1 == "trump") %>%
+    arrange(-p_together)
+```
+
+
+Matrix Factorization 
+========================================================
+&nbsp;
+
+```{r}
+pmi_matrix <- normalized_prob %>%
+    mutate(pmi = log10(p_together)) %>%
+    cast_sparse(word1, word2, pmi)
+```
+
+Reduce Dimensionality
+========================================================
+&nbsp;
+
+```{r}
+library(irlba)
+#remove missing data
+pmi_matrix@x[is.na(pmi_matrix@x)] <- 0
+#next we run SVD
+pmi_svd <- irlba(pmi_matrix, 256, maxit = 500)
+#next we output the word vectors:
+word_vectors <- pmi_svd$u
+rownames(word_vectors) <- rownames(pmi_matrix)
+```
+
+Silge's Function to find Synonyms
+========================================================
+&nbsp;
+
+```{r}
+library(broom)
+
+search_synonyms <- function(word_vectors, selected_vector) {
+    
+    similarities <- word_vectors %*% selected_vector %>%
+        tidy() %>%
+        as_tibble() %>%
+        rename(token = .rownames,
+               similarity = unrowname.x.)
+    
+    similarities %>%
+        arrange(-similarity)    
+}
+
+```
+
+Top words associated with "GOP"
+========================================================
+&nbsp;
+
+```{r}
+gop <- search_synonyms(word_vectors,word_vectors["gop",])
+gop
+```
+
+
+
+========================================================
+# *Deep Learning*
+
+Neural Networks
+========================================================
+
+<img src="brain.png" height="400" />
+
+Neural Networks
+========================================================
+&nbsp; 
+
+Rather than trying to identify rules for a computer to complete a task, let the computer "learn" from observational data instead.
+
+
+Perceptrons
+========================================================
+
+<img src="perceptron.png" height="400" />
+
+Layers
+========================================================
+
+<img src="layers.png" height="400" />
+
+Neural Networks
+========================================================
+
+Let's look at this useful [interactive visualization](https://playground.tensorflow.org)
+
+
+Neural Networks
+========================================================
+
+If you want to learn more about how neural networks work, [this book](http://neuralnetworksanddeeplearning.com) is an excellent resource
 
 ========================================================
 
@@ -60,7 +270,7 @@ Installation
 
 We will be using the library `keras`
 
-`keras` uses the TensorFlow backend, so installing this package requires a few more steps than the typical package on CRAN
+`keras` is an API that interfaces with TensorFlow and other popular deep learning tools. Installing this package requires a few more steps than the typical package on CRAN
 
 The following code installs the `keras` package, which comes with a function that will install the TensorFlow dependencies
 
@@ -80,11 +290,12 @@ install_keras()
 
 Depending on what version of Python you have, this may give you an error. You may need to open your terminal and run the following lines of code:
 
-*Note: If you have to run this code in the terminal, copying and pasting both at the same time will give you an error. You need to run them one by one, as the first line will prompt you to enter your computer user's password*
 ```
 sudo /usr/bin/easy_install pip
 sudo /usr/local/bin/pip install --upgrade virtualenv
 ```
+
+*Note: If you have to run this code in the terminal, copying and pasting both at the same time will give you an error. You need to run them one by one, as the first line will prompt you to enter your computer user's password*
 
 Other packages we need for this example
 ========================================================
