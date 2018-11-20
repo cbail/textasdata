@@ -244,7 +244,7 @@ rownames(word_vectors) <- rownames(pmi_matrix)
 Plot
 ========================================================
 &nbsp;
-```{r}
+```{r, eval=FALSE}
 #grab first 200 words
 forplot<-as.data.frame(word_vectors[1:200,])
 forplot$word<-rownames(forplot)
