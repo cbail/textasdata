@@ -29,9 +29,9 @@ This class covers a range of different topics that build on top of each other. F
 
 **[Basic Text Analysis](https://cbail.github.io/textasdata/basic-text-analysis/rmarkdown/Basic_Text_Analysis_in_R.html)**  
 
-**[Dictionary-Based Text Analysis](https://cbail.github.io/textasdata/dictionary-methods/rmarkdown/SICSS_Dictionary-Based_Text_Analysis.html)**  
+**[Dictionary-Based Text Analysis](https://cbail.github.io/textasdata/dictionary-methods/rmarkdown/Dictionary-Based_Text_Analysis.html)**  
 
-**[Topic Modeling](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/SICSS_Topic_Modeling.html)**  
+**[Topic Modeling](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/Topic_Modeling.html)**  
 
 **[Text Networks](https://compsocialscience.github.io/summer-institute/2018/materials/day3-text-analysis/text-networks/rmarkdown/SICSS_Text_Networks.html)** 
 
@@ -44,7 +44,7 @@ I am a Professor of Sociology, Public Policy, and Data Science at Duke Universit
 
 ## How can I Access the Course Materials?
 
-All of the materials for this course are available online via the links above. Many of the datasets used are loaded directly from my Github page, which also hosts all of the source files necessary to produce the tutorials above.
+All of the materials for this course are available online via the links above. Many of the datasets used are loaded directly from my Github page, which also hosts all of the source files necessary to produce the tutorials above. If you notice problems, or other limitations of the tutorials above, kindly submit a "pull" request (if you know how to use Github).
 
 ## How can I get started?
 
