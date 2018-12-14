@@ -9,14 +9,17 @@ output:
     toc_depth: '5'
 ---
 <br>
-**Chris Bail**  
+**[Text as Data Course](https://cbail.github.io/textasdata/Text_as_Data.html)**   
+**Chris Bail, PhD**  
 **Duke University**  
-**[www.chrisbail.net](http://www.chrisbail.net)**  
+[www.chrisbail.net](http://www.chrisbail.net)  
+[github.com/cbail](https://github.com/cbail)  
+[twitter.com/chris_bail](https://twitter.com/chris_bail)  
 
 
 ## **What is Screen-Scraping?**
 
-Screenscraping refers to the process of automatically extracting data from web pages, and often a long list of websites that cannot be mined by hand. As the figure below illustrates, a typical screenscraping program a) loads the name of a web-page to be scraped from a list of webpages; b) downloads the website in a format such as HTML or XML; c) finds some piece of information desired by the author of the code; and d) places that information in a convenient format such as a "data frame" (which is R speak for a dataset). Screenscraping can also be used to download other types of content as well, however, such as audio-visual content.
+Screenscraping refers to the process of automatically extracting data from web pages, and often a long list of websites that cannot be mined by hand. As the figure below illustrates, a typical screenscraping program a) loads the name of a web-page to be scraped from a list of webpages; b) downloads the website in a format such as HTML or XML; c) finds some piece of information desired by the author of the code; and d) places that information in a convenient format such as a "data frame" (which is R speak for a dataset). Screenscraping can also be used to download other types of content as well, however, such as audio-visual content. This tutorial assumes basic knowledge about R and other skills described in previous tutorials at the link above.
 
 <br>
 

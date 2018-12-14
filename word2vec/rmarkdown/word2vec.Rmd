@@ -7,12 +7,14 @@ output:
 ---
 
 <br>
-**Chris Bail, PhD**
-**Sociology, Public Policy, & Data Science**
+**[Text as Data Course](https://cbail.github.io/textasdata/Text_as_Data.html)**   
+**Chris Bail, PhD**  
 **Duke University**  
-**[www.chrisbail.net](http://www.chrisbail.net)**  
+[www.chrisbail.net](http://www.chrisbail.net)  
+[github.com/cbail](https://github.com/cbail)  
+[twitter.com/chris_bail](https://twitter.com/chris_bail)  
 
-This page builds upon previous tutorials designed to introduce you to extracting and analyzing text-based data from the internet. This tutorial introduces you to a technique for automated text analysis known as "word embeddings." This tutorial assumes quite a lot of knowledge about R and natural language processing--- if you are new to these issues, you might wish to check out some of my earlier tutorials.
+This page builds upon previous tutorials designed to introduce you to extracting and analyzing text-based data from the internet. This tutorial introduces you to a technique for automated text analysis known as "word embeddings." This tutorial assumes basic knowledge about R and other skills described in previous tutorials at the link above.
 
 ## What are Word Embeddings?
 

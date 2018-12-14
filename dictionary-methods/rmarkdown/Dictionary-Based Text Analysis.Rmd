@@ -1,22 +1,22 @@
 ---
 title: "Dictionary-Based Text Analysis in R"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
 ---
 
 <br>
-**Chris Bail**  
+**[Text as Data Course](https://cbail.github.io/textasdata/Text_as_Data.html)**   
+**Chris Bail, PhD**  
 **Duke University**  
-**[www.chrisbail.net](http://www.chrisbail.net)**  
+[www.chrisbail.net](http://www.chrisbail.net)  
+[github.com/cbail](https://github.com/cbail)  
+[twitter.com/chris_bail](https://twitter.com/chris_bail)  
 
 # Introduction
 
-Among the most basic forms of quantitative text analysis are word-counting techniques and dictionary-based methods. This tutorial will cover both of these topics, as well as sentiment analysis, which is a form of dictionary-based text analysis.
+Among the most basic forms of quantitative text analysis are word-counting techniques and dictionary-based methods. This tutorial will cover both of these topics, as well as sentiment analysis, which is a form of dictionary-based text analysis. This tutorial assumes basic knowledge about R and other skills described in previous tutorials at the link above.
 
 # Word Counting
 

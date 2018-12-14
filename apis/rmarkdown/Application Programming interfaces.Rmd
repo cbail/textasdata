@@ -10,13 +10,17 @@ output:
 ---
 
 <br>
-**Chris Bail**  
+**[Text as Data Course](https://cbail.github.io/textasdata/Text_as_Data.html)**   
+**Chris Bail, PhD**  
 **Duke University**  
-**[www.chrisbail.net](http://www.chrisbail.net)**  
+[www.chrisbail.net](http://www.chrisbail.net)  
+[github.com/cbail](https://github.com/cbail)  
+[twitter.com/chris_bail](https://twitter.com/chris_bail)  
+
 
 # Introduction
 
-Application Programming Interfaces, or APIs, have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well. Compared to screen-scraping data, which is often illegal, logistically difficult (or both), APIs are a useful tool to make custom requests for data in manner that is well structured and considerably easier to work with than the HTML or XML data described in my previous tutorials on screenscraping.
+Application Programming Interfaces, or APIs, have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well. Compared to screen-scraping data, which is often illegal, logistically difficult (or both), APIs are a useful tool to make custom requests for data in manner that is well structured and considerably easier to work with than the HTML or XML data described in my previous tutorials on screenscraping. This tutorial assumes basic knowledge about R and other skills described in previous tutorials at the link above.
 
 # What is an Application Programming Interface?
 

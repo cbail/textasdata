@@ -1,20 +1,20 @@
 ---
 title: "Basic Text Analysis in R"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
 ---
 
 <br>
-**Chris Bail**  
+**[Text as Data Course](https://cbail.github.io/textasdata/Text_as_Data.html)**   
+**Chris Bail, PhD**  
 **Duke University**  
-**[www.chrisbail.net](http://www.chrisbail.net)**  
+[www.chrisbail.net](http://www.chrisbail.net)  
+[github.com/cbail](https://github.com/cbail)  
+[twitter.com/chris_bail](https://twitter.com/chris_bail)  
 
-This tutorial is designed to introduce you to the basics of text analysis in R. It provides a foundation for future tutorials that cover more advanced topics in automated text analysis such as topic modeling and network-based text analysis.
+This tutorial is designed to introduce you to the basics of text analysis in R. It provides a foundation for future tutorials that cover more advanced topics in automated text analysis such as topic modeling and network-based text analysis. This tutorial assumes basic knowledge about R and other skills described in previous tutorials at the link above.
 
 # Character Encoding
 
