@@ -1,3 +1,5 @@
+# Text as Data
+
 Welcome to my course entitled "Text as Data." On this page, you will find an overview of the course, a description of each topic covered in the course, and a series of instructions about how to access all of the software and materials necessary for the course.
 
 ## What is Text as Data?
