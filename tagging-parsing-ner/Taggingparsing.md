@@ -32,6 +32,10 @@ transition: fade
   github: https://github.com/cbail  
   Twitter: https://www.twitter.com/chris_bail
 
+<<<<<<< Updated upstream
+=======
+========================================================
+>>>>>>> Stashed changes
 
 Outline For Today
 ========================================================
@@ -45,7 +49,14 @@ Outline For Today
 
 ## **Part of Speech Tagging**
 
+<<<<<<< Updated upstream
 
+=======
+========================================================
+
+What is Part of Speech (POS) Tagging?
+========================================================
+>>>>>>> Stashed changes
 
 What is Part of Speech (POS) Tagging?
 ========================================================
@@ -74,6 +85,7 @@ How does POS-Tagging work?
 
 
 
+<<<<<<< Updated upstream
 Backend Options for POS Tagging
 ========================================================
 &nbsp;
@@ -81,6 +93,16 @@ Backend Options for POS Tagging
 Stanford CoreNLP   
 NLTK Module (in Python)  
 UDPipe (new)
+=======
+Software Options for POS Tagging
+========================================================
+&nbsp;
+
+CoreNLP   
+NLTK Module in Python  
+UDPipe (new)
+cleanNLP (also new)
+>>>>>>> Stashed changes
 
 
 POS Tagging in CleanNLP
@@ -89,7 +111,11 @@ POS Tagging in CleanNLP
 
 CleanNLP is a relatively new package in R that handles a variety of NLP tasks including POS tagging. It supports a variety of different backends for this purpose, including CoreNLP, Spacy, and udpipe. We are going to use udpipe because it does not require Java or Python to be installed.  
 
+<<<<<<< Updated upstream
 Here's how we initialize cleanNLP with udpipe:
+=======
+Here's how we initialize clean NLP with udpipe:
+>>>>>>> Stashed changes
 
 
 ```r
@@ -120,6 +146,7 @@ POS Tagging in CleanNLP
 
 First, we annotate the sentence, then we use the `cnlp_get_token` function to extract the part of speech tags for the first 10 words in the first sentence:
 
+<<<<<<< Updated upstream
 ```r
 annotation <- cnlp_annotate(elected_official_tweets$text[1])
 pos<-cnlp_get_token(annotation)
@@ -328,3 +355,19 @@ Time
 5) Produce a visual of the propoer nouns or named entities with the most positive and most negative sentiment  
 
 ========================================================
+=======
+
+
+
+
+
+
+
+
+
+
+```
+Error in udp_tokenise_tag_parse(object$model, x, doc_id, tokenizer, tagger,  : 
+  external pointer is not valid
+```
+>>>>>>> Stashed changes
