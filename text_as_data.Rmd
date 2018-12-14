@@ -33,7 +33,7 @@ This class covers a range of different topics that build on top of each other. F
 
 **[Topic Modeling](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/Topic_Modeling.html)**  
 
-**[Text Networks](https://compsocialscience.github.io/summer-institute/2018/materials/day3-text-analysis/text-networks/rmarkdown/SICSS_Text_Networks.html)** 
+**[Text Networks](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/Text_Networks.html)** 
 
 **[Word Embeddings](https://cbail.github.io/textasdata/word2vec/rmarkdown/word2vec.html)**  
 
@@ -51,8 +51,9 @@ All of the materials for this course are available online via the links above. M
 This course assumes basic familiarity with the R software. If you are new to R, I recommend the sequence of online courses described on [this website](https://compsocialscience.github.io/summer-institute/2018/#pre-arrival) to get you started.
 
 
+## What if the Code in the Tutorials does not work?
 
-
+I will do my best to update the tutorials above as often as possible-- but in the world of open source software it is inevitable that problems will arise that I may not be able to address quickly.
 
 
 
