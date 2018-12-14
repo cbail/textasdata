@@ -38,7 +38,7 @@ This class covers a range of different topics that build on top of each other. F
 **[Word Embeddings](https://cbail.github.io/textasdata/word2vec/rmarkdown/word2vec.html)**  
 
 
-## Who are You?
+## Who am I?
 
 I am a Professor of Sociology, Public Policy, and Data Science at Duke University who studies political polarization on social media. You can learn more about my research [here](www.chrisbail.net). Much of the material in the tutorials above draws upon my own research and text analysis techniques I've developed. Yet I also draw heavily on a number of other excellent tutorials by a range of different people who I tried to remember to thank in each tutorial above---if I forgot to recognize your work, please email me!
 
