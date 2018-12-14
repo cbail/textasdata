@@ -33,7 +33,7 @@ This class covers a range of different topics that build on top of each other. F
 
 **[Topic Modeling](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/Topic_Modeling.html)**  
 
-**[Text Networks](https://cbail.github.io/textasdata/topic-modeling/rmarkdown/Text_Networks.html)** 
+**[Text Networks](https://cbail.github.io/textasdata/text-network/rmarkdown/Text_Networks.html)** 
 
 **[Word Embeddings](https://cbail.github.io/textasdata/word2vec/rmarkdown/word2vec.html)**  
 
