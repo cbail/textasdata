@@ -1,12 +1,10 @@
 ---
-title: "Text As Data"
+title: ""
 output: html_document
 ---
 
-<br>
-**Chris Bail, PhD**  
-**Sociology, Public Policy, & Data Science**  
-**Duke University**    
+![](Text_As_Data_Cover.png)
+
 <br>
 **[www.chrisbail.net](http://www.chrisbail.net)**  
 **[github.com/cbail](https://github.com/cbail)**  
