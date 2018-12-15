@@ -20,8 +20,9 @@ The past decade has witnessed an explosion of data produced by websites such as 
 ## What Subjects are Covered in this Class?
 
 This class covers a range of different topics that build on top of each other. For example, in the first tutorial, you will learn how to collect data from Twitter, and in subsequent tutorials you will learn how to analyze those data using automated text analysis techniques. For this reason, you may find it difficult to jump towards one of the most advanced issues before covering the basics.
+<br>
 
-**[Strengths and Weaknesses of Text as Data](https://cbail.github.io/textasdata/strengths-weaknesses/rmarkdown/Strengths_and_Weaknesses.html)**  
+**[Introduction: Strengths and Weaknesses of Text as Data](https://cbail.github.io/textasdata/strengths-weaknesses/rmarkdown/Strengths_and_Weaknesses.html)**  
 
 **[Application Programming Interfaces](https://cbail.github.io/textasdata/apis/rmarkdown/Application_Programming_interfaces.html)**  
 
@@ -37,6 +38,7 @@ This class covers a range of different topics that build on top of each other. F
 
 **[Word Embeddings](https://cbail.github.io/textasdata/word2vec/rmarkdown/word2vec.html)**  
 
+<br>
 
 ## Who am I?
 
