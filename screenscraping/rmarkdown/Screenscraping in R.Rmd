@@ -1,5 +1,5 @@
 ---
-title: "SICSS: Screen-Scraping in R"
+title: "Screen-Scraping in R"
 output:
   html_document:
     toc: yes
