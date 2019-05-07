@@ -18,7 +18,7 @@
 </style>
 
 
-Strengths and Weaknesses of Digital Trace Data
+Strengths and Weaknesses of Text Data
 ========================================================
 author: Chris Bail 
 date: Duke University

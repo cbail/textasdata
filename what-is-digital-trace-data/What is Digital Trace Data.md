@@ -18,7 +18,7 @@
 </style>
 
 
-What is Digital Trace Data?
+An Introduction to Text as Data
 ========================================================
 author: Chris Bail 
 date: Duke University
@@ -46,7 +46,7 @@ found our telescope. Let the revolution begin.*
 
 —Duncan Watts (2011, p. 266)
 
-What is Digital Trace Data?
+Where is Text Data Coming From?
 ========================================================
 &nbsp;
 
@@ -59,23 +59,19 @@ What is Digital Trace Data?
 -Digitization of Historical Texts/Archives
 -Audio-Visual Data  
 
-What is Digital Trace Data?
+What is Text as Data?
 ========================================================
 
 <img src="Eagle et al.png" height="600" />
 
 
-What is Digital Trace Data?
+What is Text as Data?
 ========================================================
 
 <img src="Facebook Map.png" height="600" />
 
 
 
-"Readymade" Data
-========================================================
-
-<img src="readymade.png" height="600" />
 
 "Readymade" Data
 ========================================================
